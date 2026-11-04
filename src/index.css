@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* ألوان وخطوط الموقع. غيريها هون وبتتغير بكل مكان */
+@theme {
+  --color-paper: #efe7d6;      /* لون ورق المنيو */
+  --color-paper-dark: #e4dac4;
+  --color-ink: #23271f;        /* الأسود الزيتوني */
+  --color-ink-soft: #5b5f52;
+  --color-olive: #6d7556;
+  --color-ember: #b5532c;      /* لون نار الفرن */
+
+  /* ألوان علم إيطاليا */
+  --color-it-green: #009246;
+  --color-it-white: #f4f1ea;
+  --color-it-red: #ce2b37;
+
+  --font-latin: "Playfair Display", Georgia, serif;
+  --font-script: "Caveat", cursive;
+  --font-sans: "Tajawal", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+}
+
+/* Numbers in the classic straight style, so 4 is clear */
+.font-latin {
+  font-variant-numeric: lining-nums;
+}
