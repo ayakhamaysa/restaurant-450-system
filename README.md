@@ -1,43 +1,48 @@
 # Pizzeria 450° — Restaurant Ordering System
 
-QR menu + live kitchen screen + cashier, built with **React, Vite, Tailwind CSS and Supabase** (Postgres, Auth, Realtime).
+QR menu, live kitchen screen and cashier in one app, built on Supabase.
 
-- `/` — customer menu: dine-in (table number) or takeaway
-- `/kitchen` — live orders in three lanes: new, preparing, ready (staff login)
-- `/cash` — open bills grouped by table, takeaway orders, settle payment (staff login)
+**Live:** [pizzeria-450-system.vercel.app](https://pizzeria-450-system.vercel.app) · Part of my [portfolio](https://aya-khamaysa-portfolio.vercel.app)
 
-Prices are calculated inside the database (`submit_order`), never trusted from the browser.
-Row Level Security lets customers only read the menu and submit orders.
-Paid orders are kept (`paid_at`) so sales history is not lost.
+![Pizzeria 450° — Restaurant Ordering System](docs/preview.webp)
 
----
+## Highlights
 
-## التشغيل لأول مرة
+- **`/` Customer menu:** order from the table by QR code (dine-in with table number) or takeaway.
+- **`/kitchen` Live orders** in three lanes: new, preparing, ready, updated in real time (staff login).
+- **`/cash` Cashier:** open bills grouped by table, takeaway orders, settle payment (staff login).
+- **Secure database:** prices are calculated inside the database (`submit_order`), never trusted from the browser. Row Level Security lets customers only read the menu and submit orders.
+- **Sales history kept:** paid orders stay in the database (`paid_at`).
 
-### 1) قاعدة البيانات (مرة وحدة)
-بـ Supabase ← SQL Editor ← New query:
-1. انسخي محتوى `supabase/setup-450.sql` واضغطي **Run**
-2. انسخي محتوى `supabase/seed-450-menu.sql` واضغطي **Run**
-   (هاد بيمسح منيو وطلبات البارون القديمة وبيحط منيو 450)
+## Built with
 
-### 2) حساب الموظفين
-Supabase ← Authentication ← Users ← **Add user** ← إيميل وكلمة سر.
-هاد الحساب الوحيد للمطبخ والكاش.
+React · React Router · Supabase (PostgreSQL, Auth, Realtime, RLS) · Tailwind CSS · Vite
 
-### 3) التشغيل
+## Setup
+
+**1. Database (once).** In Supabase → SQL Editor → New query, run:
+1. `supabase/setup-450.sql`
+2. `supabase/seed-450-menu.sql` (the menu)
+
+**2. Staff account.** Supabase → Authentication → Users → **Add user** (email and password). This account is used for the kitchen and the cashier.
+
+**3. Environment.** Create a `.env` file with the Supabase project URL and the public (publishable) key. Never put the `service_role` key here, and never commit `.env`.
+
+**4. Run.**
+
 ```bash
 npm install
 npm run dev
 ```
-- المنيو: http://localhost:5173
-- المطبخ: http://localhost:5173/kitchen
-- الكاش: http://localhost:5173/cash
 
-## تعديل المنيو
-Supabase ← Table Editor:
-- `categories`: الأقسام (name عربي، name_en إنجليزي، sort_order الترتيب، is_compact للمشروبات)
-- `products`: الأصناف والأسعار. `is_available = false` بيخفي الصنف من المنيو.
+- Menu: http://localhost:5173
+- Kitchen: http://localhost:5173/kitchen
+- Cashier: http://localhost:5173/cash
 
-## ملفات مهمة
-- `.env`: رابط Supabase والمفتاح العام (publishable). ممنوع تحطي هون `service_role` أبداً.
-- `src/config.js`: اسم المطعم، التواصل، عدد الطاولات.
+## Edit
+- Menu: Supabase → Table Editor → `categories` and `products` (`is_available = false` hides an item).
+- Restaurant name, contact and number of tables: `src/config.js`
+
+---
+
+Designed & built by **Aya Khamaysa** · [Portfolio](https://aya-khamaysa-portfolio.vercel.app) · [LinkedIn](https://www.linkedin.com/in/ayakhamaysa) · [One Click](https://www.instagram.com/oneclick.ps)
